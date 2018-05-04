@@ -9,24 +9,33 @@ public class bound : MonoBehaviour
     public Rigidbody player;
     public Renderer pRen, cRen;
     public WDColor chg;
-
+    
+    public float valx, valy, valz, xz;
     /*
-    public static float gravy = Physics.gravity.y;
-    public static float len = (float)1.9 * 6;
-    public static float v = Mathf.Sqrt(2 * len * gravy / Mathf.Sqrt(3));
-    public float valy = v * Mathf.Sqrt(3) / 2;
-    public float valz = v / 2;
+    void Vec()
+    {
+        float g = Physics.gravity.y;
+        float h = 3 * Mathf.Sqrt(3);
+        float len = (float) 1.9 * h;
+        float v = Mathf.Sqrt(2 * len * g / Mathf.Sqrt(3));
+        float y = v * Mathf.Sqrt(3) / 2;
+        float xz = v / 2;
+
+        v = 10.573353772573771211921517960743
+        y = 9.1567929702489178861460072896
+        xz = 5.2866768862868856059607589803715
+    }
     */
-    public float gos, gou;
     // Use this for initialization
     void Start()
     {
-        gos = (float)5.2886338279088022816502776210371;
-        gou = (float)9.1601824925655238128142625022436;
+        valz = (float)5.2866768862868856059607589803715;
+        xz = valz;
+        valy = (float)9.1567929702489178861460072896;
         chg = new WDColor();
         player = GetComponent<Rigidbody>();
         //player.velocity = new Vector3(0, 0, valz);
-        player.velocity = new Vector3(0, 0, gos);
+        player.velocity = new Vector3(0, 0, valz);
 
     }
 
@@ -50,9 +59,21 @@ public class bound : MonoBehaviour
             player.velocity = tmpv;
             */
             //Debug.Log(player.velocity);
-            player.AddForce(Vector3.left * 3f);
-            //거리길어질수잇음
-            //Debug.Log(player.velocity);
+            float curx = player.velocity.x;
+            if (-1 * curx < xz)
+            {
+                if (-1 * curx < xz - 0.1)
+                {
+                    curx -= (float)0.1;
+                }
+                else
+                {
+                    curx = -1 * xz;
+                }
+            }
+            float newz = Mathf.Sqrt(xz * xz - curx * curx);
+            player.velocity = new Vector3(curx, player.velocity.y, newz);
+            Debug.Log(player.velocity);
         }
         if (Input.GetKey(KeyCode.D))
         {
@@ -62,7 +83,20 @@ public class bound : MonoBehaviour
             player.velocity = tmpv;
             */
             //Debug.Log(player.velocity);
-            player.AddForce(Vector3.right * 3f);
+            float curx = player.velocity.x;
+            if (curx < xz)
+            {
+                if (curx < xz - 0.1)
+                {
+                    curx += (float)0.1;
+                }
+                else
+                {
+                    curx = xz;
+                }
+            }
+            float newz = Mathf.Sqrt(xz * xz - curx * curx);
+            player.velocity = new Vector3(curx, player.velocity.y, newz);
             //Debug.Log(player.velocity);
         }
     }
@@ -73,7 +107,7 @@ public class bound : MonoBehaviour
         {
             //Debug.Log(player.velocity);
             //player.velocity = new Vector3(player.velocity.x, valy, valz);
-            player.velocity = new Vector3(player.velocity.x, gou, player.velocity.z);
+            player.velocity = new Vector3(player.velocity.x, valy, player.velocity.z);
             //player.AddForce(0, (-1)*player.velocity.y, 0);
             //Debug.Log(player.velocity);
 
