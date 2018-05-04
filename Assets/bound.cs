@@ -36,7 +36,6 @@ public class bound : MonoBehaviour
         player = GetComponent<Rigidbody>();
         //player.velocity = new Vector3(0, 0, valz);
         player.velocity = new Vector3(0, 0, valz);
-
     }
 
     // Update is called once per frame
