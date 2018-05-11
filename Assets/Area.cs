@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Area : MonoBehaviour {
+    Tile[] area = new Tile[7];
 
 	// Use this for initialization
 	void Start () {
