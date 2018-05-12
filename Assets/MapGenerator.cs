@@ -10,11 +10,22 @@ public class MapGenerator : MonoBehaviour {
      * Instantiate 함수로 게임오브젝트 동적 생성(List<string>)
      * GetComponent<Area, Tile>로 각 클래스 초기화
      * 프리팹 사용 */
+     
+    public List<string[]> tileArr;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        //readS = GetComponent<parser>();
+        tileArr = GetComponent<parser>().getArr();
+
+        for (int i = 0; i < tileArr.Count; i++)
+        {
+            for (int j = 0; j < tileArr[i].Length; j++)
+            {
+                Debug.Log(tileArr[i][j]);
+            }
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {

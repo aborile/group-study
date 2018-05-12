@@ -4,21 +4,22 @@ using System.IO;
 using UnityEngine;
 
 public class parser : MonoBehaviour {
-    public List<string []> arr; 
+    public List<string []> arr;
+
 	// Use this for initialization
 	void Start () {
         /* 0: 빈 타일, 1: 일반 타일, 2: 특수 타일 */
-        StreamReader input = new StreamReader("map.txt");
+        StreamReader input = new StreamReader("map.txt.");
         //Debug.Log(input.ReadLine());
         Reader(input);
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
 
-    void Reader (StreamReader t)
+    public void Reader (StreamReader t)
     {
         string text;
         string[] sp;
@@ -38,5 +39,11 @@ public class parser : MonoBehaviour {
             }
         }
         */
+        //return arr;
+    }
+
+    public List<string []> getArr()
+    {
+        return arr;
     }
 }
