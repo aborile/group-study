@@ -33,7 +33,7 @@ public class Area : MonoBehaviour {
         len = (float)6 * Mathf.Sqrt(3);
 
         //위치별로 타일 생성
-        /*
+        
         tile[0] = Instantiate(makeTile, nowV, transform.rotation);
         tile[1] = Instantiate(makeTile, nowV + new Vector3(0, 0, len), transform.rotation);
         tile[2] = Instantiate(makeTile, nowV + new Vector3(9, 0, len/2), transform.rotation);
@@ -41,7 +41,9 @@ public class Area : MonoBehaviour {
         tile[4] = Instantiate(makeTile, nowV + new Vector3(0, 0, (-1)*len), transform.rotation);
         tile[5] = Instantiate(makeTile, nowV + new Vector3(-9, 0, (-1)*len/2), transform.rotation);
         tile[6] = Instantiate(makeTile, nowV + new Vector3(-9, 0, len/2), transform.rotation);
-        */
+        
+        // 타일 타입 저장하려다가 장렬히 망한 흔적
+        /*
         for (int i = 0; i < tile.Length; i++)
         {
             if (typeArr[i] != "")
@@ -56,6 +58,7 @@ public class Area : MonoBehaviour {
                 }
             }
         }
+        */
     }
 	
 	// Update is called once per frame

@@ -14,6 +14,8 @@ public class Tile : MonoBehaviour {
 
     public void setType(string s)
     {
+        //받은 string 값에 따라 타일 타입 지정
+        //을 했는데 생각해보니 이러면 enum 쓴 의미 없나요
         switch (s)
         {
             case "0":
