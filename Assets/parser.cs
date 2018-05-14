@@ -9,15 +9,23 @@ public class parser : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         /* 0: 빈 타일, 1: 일반 타일, 2: 특수 타일 */
-        StreamReader input = new StreamReader("map.txt.");
+        //StreamReader input = new StreamReader("map.txt.");
         //Debug.Log(input.ReadLine());
-        Reader(input);
+        //Reader(input);
+        //Debug.Log(arr[0][0]);
+        //map();
     }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+    public void map(string txt)
+    {
+        StreamReader input = new StreamReader(txt);
+        Reader(input);
+    }
 
     public void Reader (StreamReader t)
     {

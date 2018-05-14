@@ -18,8 +18,9 @@ public class MapGenerator : MonoBehaviour {
 	void Start () {
         tileArr = new List<string[]>();
         p = GetComponent<parser>();
+        p.map("map.txt");
         tileArr = p.getArr();
-        Debug.Log(p.arr);
+        //Debug.Log(p.arr);
         Area makeArea = Instantiate(area, transform.position, transform.rotation);
         makeArea.GetComponent<Area>().setTileType(tileArr[0]);
     }
