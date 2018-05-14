@@ -7,6 +7,16 @@ public class Area : MonoBehaviour {
     Tile[] tile = new Tile[7];
     public float len;
     public Tile makeTile;
+    public string[] typeArr = new string[7];
+
+    public void setTileType(string[] arr)
+    {
+        for (int i=0; i<typeArr.Length; i++)
+        {
+            typeArr[i] = arr[i];
+            Debug.Log(typeArr[i]);
+        }
+    }
 
 	// Use this for initialization
 	void Start ()

@@ -11,13 +11,17 @@ public class MapGenerator : MonoBehaviour {
      * 프리팹 사용 */
      
     public List<string[]> tileArr;
-    public GameObject area;
+    public parser p;
+    public Area area;
 
 	// Use this for initialization
 	void Start () {
-        tileArr = GetComponent<parser>().getArr();
-        GameObject makeArea = Instantiate(area, transform.position, transform.rotation);
-        makeArea.GetComponent<Area>();
+        tileArr = new List<string[]>();
+        p = GetComponent<parser>();
+        tileArr = p.getArr();
+        Debug.Log(p.arr);
+        Area makeArea = Instantiate(area, transform.position, transform.rotation);
+        makeArea.GetComponent<Area>().setTileType(tileArr[0]);
     }
 	
 	// Update is called once per frame
