@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour {
-    /* parser.cs에서 string 값 읽어오기
-     * 그 값으로 Area 클래스 초기화 (Area 붙은 빈 게임오브젝트 생성)
+    /* 그 값으로 Area 클래스 초기화 (Area 붙은 빈 게임오브젝트 생성)
      * 초기화된 Tile값으로 Tile 게임오브젝트 생성
      * (Tile 컴포넌트, mesh 렌더러 붙은 게임오브젝트)
      * Instantiate 함수로 게임오브젝트 동적 생성(List<string>)
@@ -12,19 +11,13 @@ public class MapGenerator : MonoBehaviour {
      * 프리팹 사용 */
      
     public List<string[]> tileArr;
+    public GameObject area;
 
 	// Use this for initialization
 	void Start () {
-        //readS = GetComponent<parser>();
         tileArr = GetComponent<parser>().getArr();
-
-        for (int i = 0; i < tileArr.Count; i++)
-        {
-            for (int j = 0; j < tileArr[i].Length; j++)
-            {
-                Debug.Log(tileArr[i][j]);
-            }
-        }
+        GameObject makeArea = Instantiate(area, transform.position, transform.rotation);
+        makeArea.GetComponent<Area>();
     }
 	
 	// Update is called once per frame
