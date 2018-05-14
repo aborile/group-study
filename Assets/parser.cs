@@ -21,10 +21,11 @@ public class parser : MonoBehaviour {
 		
 	}
 
-    public void map(string txt)
+    public List<string[]> makeMap(string txt)
     {
         StreamReader input = new StreamReader(txt);
         Reader(input);
+        return arr;
     }
 
     public void Reader (StreamReader t)
@@ -48,10 +49,5 @@ public class parser : MonoBehaviour {
         }
         */
         //return arr;
-    }
-
-    public List<string []> getArr()
-    {
-        return arr;
     }
 }
