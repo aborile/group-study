@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d77531a8a9dd4244db3884105e77d2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  len: 0
-  makeTile: {fileID: 0}
+  len: 10.3923
+  makeTile: {fileID: 114092880464391818, guid: 862f1aa88c895e34ca5f45bf49367372, type: 2}
   nowV: {x: 0, y: 0, z: 0}
   pos: []
   typeArr:

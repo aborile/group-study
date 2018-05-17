@@ -72,7 +72,7 @@ public class bound : MonoBehaviour
             }
             float newz = Mathf.Sqrt(xz * xz - curx * curx);
             player.velocity = new Vector3(curx, player.velocity.y, newz);
-            Debug.Log(player.velocity);
+            //Debug.Log(player.velocity);
         }
         if (Input.GetKey(KeyCode.D))
         {
@@ -98,6 +98,7 @@ public class bound : MonoBehaviour
             player.velocity = new Vector3(curx, player.velocity.y, newz);
             //Debug.Log(player.velocity);
         }
+
     }
 
     void OnTriggerEnter(Collider col)

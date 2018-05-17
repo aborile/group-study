@@ -13,18 +13,22 @@ public class MapGenerator : MonoBehaviour {
     public List<string[]> tileArr;
     public parser p;
     public Area area;
+    Vector3 areaP;
 
 	// Use this for initialization
 	void Start () {
         tileArr = new List<string[]>();     //parser에서 읽어온 값 저장
         p = GetComponent<parser>();         //parser 스크립트 불러옴
         tileArr = p.makeMap("map.txt");     //파일에서 읽은 값 담음
-        //Debug.Log(p.arr[0][0]);
         
-        Area makeArea = Instantiate(area, transform.position, transform.rotation);
-        makeArea.setTileType(tileArr[0]);
-        makeArea.GetComponent<Area>(); //해당 area의 tile type 전달
-        //Debug.Log(makeArea.typeArr[0]);
+        for (int i = 0; i < tileArr.Count; i++)
+        {
+            areaP = new Vector3(i * 2 * 9, 0, i * 2 * area.len);
+            //areaP = new Vector3(0, 0, i * 2 * area.len);
+            Area makeArea = Instantiate(area, areaP, transform.rotation);
+            makeArea.setTileType(tileArr[i]);
+            makeArea.GetComponent<Area>(); //해당 area의 tile type 전달
+        }
     }
 	
 	// Update is called once per frame
