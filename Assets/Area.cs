@@ -22,7 +22,7 @@ public class Area : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        nowV = GameObject.Find("area").transform.position;
+        nowV = new Vector3(0, 0, 0);
         pos = new Vector3[7] { nowV,
                                nowV + new Vector3(0, 0, len),
                                nowV + new Vector3(9, 0, len/2),
