@@ -24,8 +24,8 @@ public class GameFlow : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        onStateInitGame();
-	}
+        state = "main";
+    }
     // Update is called once per frame
     void Update () {
 		switch (state)
@@ -35,9 +35,6 @@ public class GameFlow : MonoBehaviour {
                 break;
             case "selectStage":
                 onStateSelectStage();
-                break;
-            case "initStage":
-                onStateInitStage();
                 break;
             case "inGame":
                 onStateInGame();
@@ -51,18 +48,14 @@ public class GameFlow : MonoBehaviour {
             case "result":
                 onStateResult();
                 break;
-                break;
         }
 	}
-
-    void onStateInitGame() {
-        //init. load the stage info
-        Debug.Log("loading . . .");
-        state = "main";
-    }
-
-    void onStateMain() {
+    
+    void onStateMain()
+    {
         if (SceneManager.GetActiveScene().name != "Main") {
+            //init. load the stage info
+            Debug.Log("loading . . .");
             SceneManager.LoadScene("Main");
         }
     }
@@ -75,15 +68,7 @@ public class GameFlow : MonoBehaviour {
         }
         //init stage data
     }
-
-    void onStateInitStage()
-    {
-        if (SceneManager.GetActiveScene().name != "InitStage")
-        {
-            SceneManager.LoadScene("InitStage");
-        }
-    }
-
+    
     void onStateInGame() {
         if (SceneManager.GetActiveScene().name != "InGame")
         {
@@ -118,49 +103,5 @@ public class GameFlow : MonoBehaviour {
             SceneManager.LoadScene("Result");
         }
         //show result
-    }
-
-    public void OnClick(Button b)
-    {
-        if (b.gameObject.name == "MainButton")
-        {
-            Debug.Log("Clicked in Main Scene!");
-            state = "selectStage";
-        }
-        else if (b.gameObject.name == "SelectButton")
-        {
-            Debug.Log("Clicked in Select Scene!");
-            state = "initStage";
-        }
-        else if (b.gameObject.name == "StageButton")
-        {
-            Debug.Log("Clicked in InitStage Scene!");
-            state = "inGame";
-        }
-        else if (b.gameObject.name == "OverButton")
-        {
-            Debug.Log("Clicked in Game Scene!");
-            state = "gameOver";
-        }
-        else if (b.gameObject.name == "ClearButton")
-        {
-            Debug.Log("Clicked in Game Scene!");
-            state = "gameClear";
-        }
-        else if (b.gameObject.name == "AgainButton")
-        {
-            Debug.Log("Clicked in GameOver Scene!");
-            state = "initStage";
-        }
-        else if (b.gameObject.name == "ResultButton")
-        {
-            Debug.Log("Clicked in GameClear Scene!");
-            state = "result";
-        }
-        else if (b.gameObject.name == "PlayButton")
-        {
-            Debug.Log("Clicked in Result Scene!");
-            state = "selectStage";
-        }
     }
 }

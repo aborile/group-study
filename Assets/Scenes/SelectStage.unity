@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 267473795}
   - component: {fileID: 267473794}
   m_Layer: 5
-  m_Name: SelectButton
+  m_Name: stage2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -275,9 +275,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114526164088924764, guid: 010f0161523e6b443ab319726c75650e,
+      - m_Target: {fileID: 114101532610621428, guid: 010f0161523e6b443ab319726c75650e,
           type: 2}
-        m_MethodName: OnClick
+        m_MethodName: OnClickButtonSelect
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 267473795}
@@ -474,7 +474,7 @@ GameObject:
   - component: {fileID: 761408302}
   - component: {fileID: 761408301}
   m_Layer: 5
-  m_Name: SelectButton
+  m_Name: stage3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -549,9 +549,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114526164088924764, guid: 010f0161523e6b443ab319726c75650e,
+      - m_Target: {fileID: 114101532610621428, guid: 010f0161523e6b443ab319726c75650e,
           type: 2}
-        m_MethodName: OnClick
+        m_MethodName: OnClickButtonSelect
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 761408302}
@@ -922,7 +922,7 @@ GameObject:
   - component: {fileID: 1780385938}
   - component: {fileID: 1780385937}
   m_Layer: 5
-  m_Name: SelectButton
+  m_Name: stage1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -997,9 +997,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114526164088924764, guid: 010f0161523e6b443ab319726c75650e,
+      - m_Target: {fileID: 114101532610621428, guid: 010f0161523e6b443ab319726c75650e,
           type: 2}
-        m_MethodName: OnClick
+        m_MethodName: OnClickButtonSelect
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1780385938}

@@ -190,13 +190,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114526164088924764, guid: 010f0161523e6b443ab319726c75650e,
-          type: 2}
-        m_MethodName: OnClick
-        m_Mode: 2
+      - m_Target: {fileID: 1271038239}
+        m_MethodName: OnClickButtonMain
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 307282325}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -375,6 +374,54 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &1271038238
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4841446499700034, guid: 010f0161523e6b443ab319726c75650e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 26.883238
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841446499700034, guid: 010f0161523e6b443ab319726c75650e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4.9213505
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841446499700034, guid: 010f0161523e6b443ab319726c75650e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -18.886908
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841446499700034, guid: 010f0161523e6b443ab319726c75650e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841446499700034, guid: 010f0161523e6b443ab319726c75650e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841446499700034, guid: 010f0161523e6b443ab319726c75650e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841446499700034, guid: 010f0161523e6b443ab319726c75650e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841446499700034, guid: 010f0161523e6b443ab319726c75650e, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 010f0161523e6b443ab319726c75650e, type: 2}
+  m_IsPrefabParent: 0
+--- !u!114 &1271038239 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114101532610621428, guid: 010f0161523e6b443ab319726c75650e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1271038238}
+  m_Script: {fileID: 11500000, guid: cff315f67cde4f443adf4e29761c1af7, type: 3}
 --- !u!1 &1775993736
 GameObject:
   m_ObjectHideFlags: 0
