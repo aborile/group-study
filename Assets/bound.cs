@@ -9,8 +9,9 @@ public class bound : MonoBehaviour
     public Rigidbody player;
     public Renderer pRen, cRen;
     public WDColor chg;
+    public GameObject plane;
     
-    public float valx, valy, valz, xz;
+    public float valx, valy, valz, xz, val, len;
     /*
     void Vec()
     {
@@ -32,10 +33,14 @@ public class bound : MonoBehaviour
         valz = (float)5.2866768862868856059607589803715;
         xz = valz;
         valy = (float)9.1567929702489178861460072896;
+        val = Mathf.Sqrt(valz * valz + valy * valy) / 2;
+        len = (float)9.8726896031426005731064441465835;
         chg = new WDColor();
         player = GetComponent<Rigidbody>();
+        plane = GameObject.Find("Plane");
         //player.velocity = new Vector3(0, 0, valz);
         player.velocity = new Vector3(0, 0, valz);
+        plane.transform.position = new Vector3(0, (float)1.21, len/2);
     }
 
     // Update is called once per frame
@@ -83,6 +88,7 @@ public class bound : MonoBehaviour
             */
             //Debug.Log(player.velocity);
             float curx = player.velocity.x;
+            float curz = player.velocity.z;
             if (curx < xz)
             {
                 if (curx < xz - 0.1)
@@ -93,9 +99,11 @@ public class bound : MonoBehaviour
                 {
                     curx = xz;
                 }
+                float newz = Mathf.Sqrt(xz * xz - curx * curx);
+                player.velocity = new Vector3(curx, player.velocity.y, newz);
+
+                plane.transform.Translate(len/val*(float)0.1/(float)1.5, 0, (newz-curz)*len/val/(float)1.5);
             }
-            float newz = Mathf.Sqrt(xz * xz - curx * curx);
-            player.velocity = new Vector3(curx, player.velocity.y, newz);
             //Debug.Log(player.velocity);
         }
 
@@ -121,7 +129,8 @@ public class bound : MonoBehaviour
 
             Color newc = chg.ctoR(pcCMY.add(ccCMY));
             pRen.material.SetColor("_Color", newc);
-            //그리고 타일높이는 6이 맞을까 거지같은 포물선...
+
+            plane.transform.Translate(player.velocity.x/val*len, 0, player.velocity.z/val*len);
         }
     }
 }
