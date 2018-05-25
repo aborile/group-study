@@ -34,13 +34,13 @@ public class bound : MonoBehaviour
         xz = valz;
         valy = (float)9.1567929702489178861460072896;
         val = Mathf.Sqrt(valz * valz + valy * valy) / 2;
-        len = (float)9.8726896031426005731064441465835;
+        len = (float)9.7726896031426005731064441465835;
         chg = new WDColor();
         player = GetComponent<Rigidbody>();
         plane = GameObject.Find("Plane");
         //player.velocity = new Vector3(0, 0, valz);
         player.velocity = new Vector3(0, 0, valz);
-        plane.transform.position = new Vector3(0, (float)1.21, len/2);
+        plane.transform.position = new Vector3(0, (float)1.21, len/2 - (float)0.5);
     }
 
     // Update is called once per frame
@@ -64,19 +64,24 @@ public class bound : MonoBehaviour
             */
             //Debug.Log(player.velocity);
             float curx = player.velocity.x;
+            float curz = player.velocity.z;
+            float dx;
             if (-1 * curx < xz)
             {
                 if (-1 * curx < xz - 0.1)
                 {
-                    curx -= (float)0.1;
+                    dx = (float)0.1 * (-1);
+                    curx += dx;
                 }
                 else
                 {
+                    dx = -1 * xz - curx;
                     curx = -1 * xz;
                 }
+                float newz = Mathf.Sqrt(xz * xz - curx * curx);
+                player.velocity = new Vector3(curx, player.velocity.y, newz);
+                plane.transform.Translate(len / val * dx / (float)1.5, 0, (newz - curz) * len / val / (float)1.5);
             }
-            float newz = Mathf.Sqrt(xz * xz - curx * curx);
-            player.velocity = new Vector3(curx, player.velocity.y, newz);
             //Debug.Log(player.velocity);
         }
         if (Input.GetKey(KeyCode.D))
@@ -89,30 +94,35 @@ public class bound : MonoBehaviour
             //Debug.Log(player.velocity);
             float curx = player.velocity.x;
             float curz = player.velocity.z;
+            float dx;
             if (curx < xz)
             {
                 if (curx < xz - 0.1)
                 {
-                    curx += (float)0.1;
+                    dx = (float)0.1;
+                    curx += dx;
                 }
                 else
                 {
+                    dx = xz - curx;
                     curx = xz;
                 }
                 float newz = Mathf.Sqrt(xz * xz - curx * curx);
                 player.velocity = new Vector3(curx, player.velocity.y, newz);
 
-                plane.transform.Translate(len/val*(float)0.1/(float)1.5, 0, (newz-curz)*len/val/(float)1.5);
+                plane.transform.Translate(len/val*dx/(float)1.5, 0, (newz-curz)*len/val/(float)1.5);
             }
             //Debug.Log(player.velocity);
         }
-
+        //Debug.Log(player.position.y);
     }
 
     void OnTriggerEnter(Collider col)
     {
         if(col.tag == "Land")
         {
+            Debug.Log(player.position);
+            Debug.Log(plane.transform.position);
             //Debug.Log(player.velocity);
             //player.velocity = new Vector3(player.velocity.x, valy, valz);
             player.velocity = new Vector3(player.velocity.x, valy, player.velocity.z);
@@ -130,7 +140,13 @@ public class bound : MonoBehaviour
             Color newc = chg.ctoR(pcCMY.add(ccCMY));
             pRen.material.SetColor("_Color", newc);
 
+            //Debug.Log(player.transform.position.z);
+
             plane.transform.Translate(player.velocity.x/val*len, 0, player.velocity.z/val*len);
+        }
+        if(col.tag == "Respawn")
+        {
+            Debug.Log("great");
         }
     }
 }
