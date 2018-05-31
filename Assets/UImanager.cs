@@ -72,4 +72,16 @@ public class UImanager : MonoBehaviour {
         Debug.Log("Clicked in Result Scene!");
         GameFlow.state = "selectStage";
     }
+
+    public void OnClickButtonRestart()
+    {
+        Debug.Log("Restart the game!");
+        GameFlow.state = "gameOver";
+    }
+
+    public void OnClickButtonQuit()
+    {
+        Debug.Log("Quit the game!");
+        GameFlow.state = "selectStage";
+    }
 }

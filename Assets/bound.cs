@@ -9,7 +9,7 @@ public class bound : MonoBehaviour
     public Rigidbody player;
     public Renderer pRen, cRen;
     public WDColor chg;
-    public GameObject plane;
+    //public GameObject plane;
     
     public float valx, valy, valz, xz, val, len;
     /*
@@ -37,10 +37,10 @@ public class bound : MonoBehaviour
         len = (float)9.7726896031426005731064441465835;
         chg = new WDColor();
         player = GetComponent<Rigidbody>();
-        plane = GameObject.Find("Plane");
+        //plane = GameObject.Find("Scope");
         //player.velocity = new Vector3(0, 0, valz);
         player.velocity = new Vector3(0, 0, valz);
-        plane.transform.position = new Vector3(0, (float)1.21, len/2 - (float)0.5);
+        //plane.transform.position = new Vector3(0, (float)1.21, len/2 - (float)0.5);
     }
 
     // Update is called once per frame
@@ -80,7 +80,7 @@ public class bound : MonoBehaviour
                 }
                 float newz = Mathf.Sqrt(xz * xz - curx * curx);
                 player.velocity = new Vector3(curx, player.velocity.y, newz);
-                plane.transform.Translate(len / val * dx / (float)1.5, 0, (newz - curz) * len / val / (float)1.5);
+                //plane.transform.Translate(len / val * dx / (float)1.5, 0, (newz - curz) * len / val / (float)1.5);
             }
             //Debug.Log(player.velocity);
         }
@@ -108,9 +108,15 @@ public class bound : MonoBehaviour
                     curx = xz;
                 }
                 float newz = Mathf.Sqrt(xz * xz - curx * curx);
-                player.velocity = new Vector3(curx, player.velocity.y, newz);
+                Vector3 asdf = new Vector3(curx, player.velocity.y, newz);
+                player.velocity = asdf;
+                /*
+                
 
-                plane.transform.Translate(len/val*dx/(float)1.5, 0, (newz-curz)*len/val/(float)1.5);
+                //plane.transform.Translate(move);
+                float deg = Mathf.Acos(Vector3.Dot(asdf.normalized, player.velocity.normalized)) * Mathf.Rad2Deg;
+                
+                plane.transform.RotateAround(player.position, Vector3.up, deg);*/
             }
             //Debug.Log(player.velocity);
         }
@@ -121,8 +127,8 @@ public class bound : MonoBehaviour
     {
         if(col.tag == "Land")
         {
-            Debug.Log(player.position);
-            Debug.Log(plane.transform.position);
+            //Debug.Log(player.position);
+            //Debug.Log(plane.transform.position);
             //Debug.Log(player.velocity);
             //player.velocity = new Vector3(player.velocity.x, valy, valz);
             player.velocity = new Vector3(player.velocity.x, valy, player.velocity.z);
@@ -141,8 +147,10 @@ public class bound : MonoBehaviour
             pRen.material.SetColor("_Color", newc);
 
             //Debug.Log(player.transform.position.z);
-
+            /*
+            plane.transform.rotation = Quaternion.identity;
             plane.transform.Translate(player.velocity.x/val*len, 0, player.velocity.z/val*len);
+            Debug.Log(plane.transform.position);*/
         }
         if(col.tag == "Respawn")
         {

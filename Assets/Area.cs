@@ -7,6 +7,7 @@ public class Area : MonoBehaviour {
     Tile[] tile;
     public float len = (float)6 * Mathf.Sqrt(3);
     public Tile makeTile;
+    public GameObject wall, makewall;
     public Vector3 nowV;
     public Vector3[] pos;
     public string[] typeArr = new string[7];
@@ -44,8 +45,16 @@ public class Area : MonoBehaviour {
                 {
                     Destroy(tile[i].gameObject);
                 }
+                else if (tile[i].tileType == Tile.Type.initial)
+                {
+                    //벽 생성
+                    wall = Instantiate(makewall, pos[i], transform.rotation);
+
+                }
             }
         }
+
+
         
     }
 	

@@ -190,7 +190,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1271038239}
+      - m_Target: {fileID: 1612751489}
         m_MethodName: OnClickButtonMain
         m_Mode: 1
         m_Arguments:
@@ -416,7 +416,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 010f0161523e6b443ab319726c75650e, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1271038239 stripped
+--- !u!114 &1612751489 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114101532610621428, guid: 010f0161523e6b443ab319726c75650e,
     type: 2}
