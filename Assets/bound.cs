@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class bound : MonoBehaviour
 {
@@ -145,6 +146,8 @@ public class bound : MonoBehaviour
 
             Color newc = chg.ctoR(pcCMY.add(ccCMY));
             pRen.material.SetColor("_Color", newc);
+            Color barc = new Color(newc.r, newc.g, newc.b, (float)1.0);
+            GameObject.Find("color bar").GetComponent<Image>().color = barc;
 
             //Debug.Log(player.transform.position.z);
             /*

@@ -49,6 +49,7 @@ public class Area : MonoBehaviour {
                 {
                     //벽 생성
                     wall = Instantiate(makewall, pos[i], transform.rotation);
+                    wall = Instantiate(makewall, pos[i], transform.rotation);
 
                 }
             }
