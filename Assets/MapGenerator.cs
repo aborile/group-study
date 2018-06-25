@@ -26,6 +26,7 @@ public class MapGenerator : MonoBehaviour {
             areaP = new Vector3(i * 2 * 9, 0, i * 2 * area.len);
             //areaP = new Vector3(0, 0, i * 2 * area.len);
             Area makeArea = Instantiate(area, areaP, transform.rotation);
+            makeArea.gameObject.name = "Tile " + i;
             makeArea.setTileType(tileArr[i]);
             makeArea.GetComponent<Area>(); //해당 area의 tile type 전달
         }

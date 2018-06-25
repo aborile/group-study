@@ -53,6 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   len: 10.3923
   makeTile: {fileID: 114092880464391818, guid: 862f1aa88c895e34ca5f45bf49367372, type: 2}
+  wall: {fileID: 0}
+  makewall: {fileID: 1680034870124120, guid: cace3b64c102ff3458deabbc59ce43b1, type: 2}
   nowV: {x: 0, y: 0, z: 0}
   pos: []
   typeArr:

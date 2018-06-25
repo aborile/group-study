@@ -39,6 +39,7 @@ public class Area : MonoBehaviour {
             if (typeArr[i] != "")
             {
                 tile[i] = Instantiate(makeTile, pos[i], transform.rotation);
+                tile[i].gameObject.name = "tile" + i;
                 tile[i].GetComponent<Tile>();
                 tile[i].setType(typeArr[i]);
                 if (tile[i].tileType == Tile.Type.empty)
