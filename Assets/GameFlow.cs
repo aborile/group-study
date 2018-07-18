@@ -9,6 +9,10 @@ public class GameFlow : MonoBehaviour {
     public static string state;
     public static GameFlow instance = null;
 
+    public parser p;
+    GameObject text1, text2, text3;
+
+
     private void Awake()
     {
         if (instance == null)
@@ -23,7 +27,8 @@ public class GameFlow : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         state = "main";
     }
     // Update is called once per frame
@@ -36,8 +41,14 @@ public class GameFlow : MonoBehaviour {
             case "selectStage":
                 onStateSelectStage();
                 break;
-            case "inGame":
-                onStateInGame();
+            case "inGameStage1":
+                onStateInGame1();
+                break;
+            case "inGameStage2":
+                onStateInGame2();
+                break;
+            case "inGameStage3":
+                onStateInGame3();
                 break;
             case "gameOver":
                 onStateGameOver();
@@ -67,12 +78,43 @@ public class GameFlow : MonoBehaviour {
             SceneManager.LoadScene("SelectStage");
         }
         //init stage data
+        text1 = GameObject.Find("Text1");
+        text2 = GameObject.Find("Text2");
+        text3 = GameObject.Find("Text3");
+        p = GameObject.Find("GameObject").GetComponent<parser>();
+        p.makeData("map.txt");
+        if (p.isCleared != null && (text1 != null && text2 != null && text3 != null))
+        {
+            text1.SetActive(p.isCleared[0]);
+            text2.SetActive(p.isCleared[1]);
+            text3.SetActive(p.isCleared[2]);
+        }
     }
     
-    void onStateInGame() {
-        if (SceneManager.GetActiveScene().name != "InGame")
+    void onStateInGame1() {
+        if (SceneManager.GetActiveScene().name != "InGameStage1")
         {
-            SceneManager.LoadScene("InGame");
+            SceneManager.LoadScene("InGameStage1");
+        }
+        //update UI of player color
+        //click menu button to move to Menu Scene
+        //or GameOver
+    }
+    void onStateInGame2()
+    {
+        if (SceneManager.GetActiveScene().name != "InGameStage2")
+        {
+            SceneManager.LoadScene("InGameStage2");
+        }
+        //update UI of player color
+        //click menu button to move to Menu Scene
+        //or GameOver
+    }
+    void onStateInGame3()
+    {
+        if (SceneManager.GetActiveScene().name != "InGameStage3")
+        {
+            SceneManager.LoadScene("InGameStage3");
         }
         //update UI of player color
         //click menu button to move to Menu Scene

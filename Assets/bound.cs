@@ -161,4 +161,14 @@ public class bound : MonoBehaviour
         }
     }
     
+    void ColorScore()
+    {
+        Color pColor = player.gameObject.GetComponent<Renderer>().material.GetColor("_Color");
+        Vector3 pVec = new Vector3(pColor.r, pColor.g, pColor.b);
+        Vector3 dVec = new Vector3(0.5f, 0.3f, 1);
+        Vector3 sVec = dVec - pVec;
+        float sVecSiz = Mathf.Pow(sVec.x * sVec.x + sVec.y * sVec.y + sVec.z * sVec.z, 0.5f);
+        float dVecSiz = Mathf.Pow(dVec.x * dVec.x + dVec.y * dVec.y + dVec.z * sVec.z, 0.5f);
+        float score = (1 > (sVecSiz / dVecSiz) ? 0 : (1 - (sVecSiz / dVecSiz)) * 100);
+    }
 }

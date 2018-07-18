@@ -6,12 +6,13 @@ using System;
 public class Tile : MonoBehaviour {
     public enum Type { empty, normal, initial };
     public Type tileType;
-    public Dictionary<int[], int> dic;
+    //public Dictionary<int[], int> dic;
 
     // Use this for initialization
     void Start() {
         //dic = new Dictionary<int, Dictionary<int, int>();
-        dic = new Dictionary<int[], int>();
+
+        /*dic = new Dictionary<int[], int>();
         dic[new int[] { 0, 1 }] = 0;
         dic[new int[] { 0, 2 }] = 1;
         dic[new int[] { 0, 3 }] = 2;
@@ -42,7 +43,7 @@ public class Tile : MonoBehaviour {
         dic[new int[] { 6, 0 }] = 2;
         dic[new int[] { 6, 1 }] = 1;
         dic[new int[] { 6, 5 }] = 3;
-        Debug.Log(dic[new int[] { 0, 1 }]);
+        Debug.Log(dic[new int[] { 0, 1 }]);*/
 
     }
 
@@ -64,6 +65,7 @@ public class Tile : MonoBehaviour {
         }
 
     }
+    /*
     private int RemoveWall(string other) {
         int thisTile = this.gameObject.name.ToCharArray()[4] - '0';
         int otherTile = other.ToCharArray()[4] - '0';
@@ -80,6 +82,7 @@ public class Tile : MonoBehaviour {
             return -1;
         }
     }
+    
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("갸아아악");
@@ -93,6 +96,7 @@ public class Tile : MonoBehaviour {
         }
         Debug.Log(wallNum);
     }
+    */
 
     // Update is called once per frame
     void Update () {

@@ -7,7 +7,6 @@ public class UImanager : MonoBehaviour {
     
 	// Use this for initialization
 	void Start () {
-
 	}
 	
 	// Update is called once per frame
@@ -27,17 +26,19 @@ public class UImanager : MonoBehaviour {
         Debug.Log("Clicked in Select Scene!");
         if (b.gameObject.name == "stage1")
         {
+            GameFlow.state = "inGameStage1";
             Debug.Log("Start Stage 1");
         }
         else if (b.gameObject.name == "stage2")
         {
+            GameFlow.state = "inGameStage2";
             Debug.Log("Start Stage 2");
         }
         else if (b.gameObject.name == "stage3")
         {
+            GameFlow.state = "inGameStage3";
             Debug.Log("Start Stage 3");
         }
-        GameFlow.state = "inGame";
     }
 
     public void OnClickButtonInGame(Button b)
