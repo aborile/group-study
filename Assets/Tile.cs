@@ -6,6 +6,7 @@ using System;
 public class Tile : MonoBehaviour {
     public enum Type { empty, normal, initial };
     public Type tileType;
+    public Color tileColor;
     //public Dictionary<int[], int> dic;
 
     // Use this for initialization
@@ -64,6 +65,13 @@ public class Tile : MonoBehaviour {
                 break;
         }
 
+    }
+
+    public void setColor(double[] c)
+    {
+        tileColor.r = (float)c[0];
+        tileColor.g = (float)c[1];
+        tileColor.b = (float)c[2];
     }
     /*
     private int RemoveWall(string other) {

@@ -11,7 +11,8 @@ public class MapGenerator : MonoBehaviour {
      * GetComponent<Area, Tile>로 각 클래스 초기화
      * 프리팹 사용 */
      
-    public List<List<string[]>> tileArr;
+    public List<List<string[]>> tileType;
+    public List<List<double[][]>> tileColor;
     public parser p;
     public Area area;
     Vector3 areaP;
@@ -21,18 +22,20 @@ public class MapGenerator : MonoBehaviour {
         int stageNum = SceneManager.GetActiveScene().name.ToCharArray()[SceneManager.GetActiveScene().name.Length - 1] - '1';
         Debug.Log(stageNum);
 
-        tileArr = new List<List<string[]>>();     //parser에서 읽어온 값 저장
+        tileType = new List<List<string[]>>();     //parser에서 읽어온 값 저장
+        tileColor = new List<List<double[][]>>();
         p = GameObject.Find("GameObject").GetComponent<parser>();         //parser 스크립트 불러옴
-        tileArr = p.makeData("map.txt");     //파일에서 읽은 값 담음
-
+        tileType = p.makeData();     //파일에서 읽은 값 담음
+        tileColor = p.makeColor();
         
-        for (int i = 0; i < tileArr[stageNum].Count; i++)
+        for (int i = 0; tileType[stageNum].Count == tileColor[stageNum].Count && i < tileType[stageNum].Count; i++)
         {
             areaP = new Vector3(i * 2 * 9, 0, i * 2 * area.len);
             //areaP = new Vector3(0, 0, i * 2 * area.len);
             Area makeArea = Instantiate(area, areaP, transform.rotation);
             makeArea.gameObject.name = "Tile " + i;
-            makeArea.setTileType(tileArr[stageNum][i]);
+            makeArea.setTileType(tileType[stageNum][i]);
+            makeArea.setTileColor(tileColor[stageNum][i]);
             makeArea.GetComponent<Area>(); //해당 area의 tile type 전달
         }
     }

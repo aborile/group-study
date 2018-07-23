@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UImanager : MonoBehaviour {
-    
-	// Use this for initialization
-	void Start () {
+
+    string gameSceneOverIn;
+
+    // Use this for initialization
+    void Start () {
 	}
 	
 	// Update is called once per frame
@@ -47,6 +50,7 @@ public class UImanager : MonoBehaviour {
         if (b.gameObject.name == "over")
         {
             Debug.Log("Game Over!");
+            gameSceneOverIn = SceneManager.GetActiveScene().name.Substring(SceneManager.GetActiveScene().name.Length - 1);
             GameFlow.state = "gameOver";
         }
         else if (b.gameObject.name == "clear")
@@ -59,7 +63,8 @@ public class UImanager : MonoBehaviour {
     public void OnClickButtonGameOver()
     {
         Debug.Log("Clicked in GameOver Scene!");
-        GameFlow.state = "inGame";
+        Debug.Log(gameSceneOverIn);
+        GameFlow.state = "inGameStage" + gameSceneOverIn;
     }
 
     public void OnClickButtonGameClear()
@@ -77,6 +82,7 @@ public class UImanager : MonoBehaviour {
     public void OnClickButtonRestart()
     {
         Debug.Log("Restart the game!");
+        gameSceneOverIn = SceneManager.GetActiveScene().name.Substring(SceneManager.GetActiveScene().name.Length - 1);
         GameFlow.state = "gameOver";
     }
 

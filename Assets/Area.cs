@@ -11,12 +11,21 @@ public class Area : MonoBehaviour {
     public Vector3 nowV;
     public Vector3[] pos;
     public string[] typeArr = new string[7];
+    public double[][] colorArr = new double[7][];
 
     public void setTileType(string[] arr) //tile type 저장
     {
         for (int i=0; i<typeArr.Length; i++)
         {
             typeArr[i] = arr[i];
+        }
+    }
+
+    public void setTileColor(double[][] arr)
+    {
+        for (int i=0; i<colorArr.Length; i++)
+        {
+            colorArr[i] = arr[i];
         }
     }
 
@@ -42,6 +51,10 @@ public class Area : MonoBehaviour {
                 tile[i].gameObject.name = "tile" + i;
                 tile[i].GetComponent<Tile>();
                 tile[i].setType(typeArr[i]);
+                tile[i].setColor(colorArr[i]);
+                tile[i].GetComponent<Renderer>().material.SetColor("_Color", tile[i].tileColor);
+                tile[i].transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color", tile[i].tileColor);
+                Debug.Log(tile[i].GetComponentInChildren<MeshRenderer>().material.GetColor("_Color"));
                 if (tile[i].tileType == Tile.Type.empty)
                 {
                     Destroy(tile[i].gameObject);
@@ -51,7 +64,6 @@ public class Area : MonoBehaviour {
                     //벽 생성
                     wall = Instantiate(makewall, pos[i], transform.rotation);
                     wall = Instantiate(makewall, pos[i], transform.rotation);
-
                 }
             }
         }

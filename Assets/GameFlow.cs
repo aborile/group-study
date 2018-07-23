@@ -82,7 +82,7 @@ public class GameFlow : MonoBehaviour {
         text2 = GameObject.Find("Text2");
         text3 = GameObject.Find("Text3");
         p = GameObject.Find("GameObject").GetComponent<parser>();
-        p.makeData("map.txt");
+        p.makeData();
         if (p.isCleared != null && (text1 != null && text2 != null && text3 != null))
         {
             text1.SetActive(p.isCleared[0]);

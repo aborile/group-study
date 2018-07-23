@@ -269,7 +269,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: d69eb55c408d7b045b401ecb31205a50, type: 2}
+  - {fileID: 2100000, guid: 62e94429dbf18374994ca88b64a2798c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -304,7 +304,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: d69eb55c408d7b045b401ecb31205a50, type: 2}
+  - {fileID: 2100000, guid: 62e94429dbf18374994ca88b64a2798c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -372,6 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 0
+  tileColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!212 &212044730175444084
 SpriteRenderer:
   m_ObjectHideFlags: 1
