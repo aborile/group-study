@@ -56,6 +56,8 @@ public class UImanager : MonoBehaviour {
         else if (b.gameObject.name == "clear")
         {
             Debug.Log("Game Clear!");
+            gameSceneOverIn = SceneManager.GetActiveScene().name.Substring(SceneManager.GetActiveScene().name.Length - 1);
+            GameFlow.LastScene(gameSceneOverIn);
             GameFlow.state = "gameClear";
         }
     }
@@ -89,6 +91,7 @@ public class UImanager : MonoBehaviour {
     public void OnClickButtonQuit()
     {
         Debug.Log("Quit the game!");
+        gameSceneOverIn = SceneManager.GetActiveScene().name.Substring(SceneManager.GetActiveScene().name.Length - 1);
         GameFlow.state = "selectStage";
     }
 }

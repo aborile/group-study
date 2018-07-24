@@ -8,10 +8,10 @@ public class GameFlow : MonoBehaviour {
 
     public static string state;
     public static GameFlow instance = null;
+    public static int gameScenePlayedLast;
 
     public parser p;
     GameObject text1, text2, text3;
-
 
     private void Awake()
     {
@@ -82,7 +82,6 @@ public class GameFlow : MonoBehaviour {
         text2 = GameObject.Find("Text2");
         text3 = GameObject.Find("Text3");
         p = GameObject.Find("GameObject").GetComponent<parser>();
-        p.makeData();
         if (p.isCleared != null && (text1 != null && text2 != null && text3 != null))
         {
             text1.SetActive(p.isCleared[0]);
@@ -137,6 +136,7 @@ public class GameFlow : MonoBehaviour {
         }
         //unable to move player
         //save data of cleared stage
+        p.isCleared[gameScenePlayedLast] = true;
     }
 
     void onStateResult() {
@@ -145,5 +145,10 @@ public class GameFlow : MonoBehaviour {
             SceneManager.LoadScene("Result");
         }
         //show result
+    }
+
+    public static void LastScene(string sceneNum)
+    {
+        gameScenePlayedLast = sceneNum[0] - '1';
     }
 }

@@ -75,4 +75,9 @@ public class parser : MonoBehaviour {
             }
         }
     }
+
+    public void Edit()
+    {
+        // change the value of each stage if the stage have been cleared
+    }
 }

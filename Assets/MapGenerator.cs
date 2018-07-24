@@ -38,6 +38,9 @@ public class MapGenerator : MonoBehaviour {
             makeArea.setTileColor(tileColor[stageNum][i]);
             makeArea.GetComponent<Area>(); //해당 area의 tile type 전달
         }
+
+        Rigidbody player = GetComponent<Rigidbody>();
+        player.transform.Rotate(new Vector3(0, 30, 0), Space.Self);
     }
 	
 	// Update is called once per frame
