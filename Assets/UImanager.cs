@@ -20,13 +20,16 @@ public class UImanager : MonoBehaviour {
     public void OnClickButtonMain()
     {
         Debug.Log("Clicked in Main Scene!");
+        GameFlow.isFirst = true;
         GameFlow.state = "selectStage";
+        Debug.Log("all have been changed in UIMagager");
 
     }
 
     public void OnClickButtonSelect(Button b)
     {
         Debug.Log("Clicked in Select Scene!");
+        GameFlow.isFirst = true;
         if (b.gameObject.name == "stage1")
         {
             GameFlow.state = "inGameStage1";
@@ -47,6 +50,7 @@ public class UImanager : MonoBehaviour {
     public void OnClickButtonInGame(Button b)
     {
         Debug.Log("Clicked in Game Scene!");
+        GameFlow.isFirst = true;
         if (b.gameObject.name == "over")
         {
             Debug.Log("Game Over!");
@@ -65,25 +69,28 @@ public class UImanager : MonoBehaviour {
     public void OnClickButtonGameOver()
     {
         Debug.Log("Clicked in GameOver Scene!");
-        Debug.Log(gameSceneOverIn);
-        GameFlow.state = "inGameStage" + gameSceneOverIn;
+        GameFlow.isFirst = true;
+        GameFlow.state = "inGameStage" + GameFlow.gameScenePlayedLast;
     }
 
     public void OnClickButtonGameClear()
     {
         Debug.Log("Clicked in GameClear Scene!");
+        GameFlow.isFirst = true;
         GameFlow.state = "result";
     }
 
     public void OnClickButtonResult()
     {
         Debug.Log("Clicked in Result Scene!");
+        GameFlow.isFirst = true;
         GameFlow.state = "selectStage";
     }
 
     public void OnClickButtonRestart()
     {
         Debug.Log("Restart the game!");
+        GameFlow.isFirst = true;
         gameSceneOverIn = SceneManager.GetActiveScene().name.Substring(SceneManager.GetActiveScene().name.Length - 1);
         GameFlow.state = "gameOver";
     }
@@ -91,6 +98,7 @@ public class UImanager : MonoBehaviour {
     public void OnClickButtonQuit()
     {
         Debug.Log("Quit the game!");
+        GameFlow.isFirst = true;
         gameSceneOverIn = SceneManager.GetActiveScene().name.Substring(SceneManager.GetActiveScene().name.Length - 1);
         GameFlow.state = "selectStage";
     }

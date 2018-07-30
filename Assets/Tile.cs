@@ -72,6 +72,7 @@ public class Tile : MonoBehaviour {
         tileColor.r = (float)c[0];
         tileColor.g = (float)c[1];
         tileColor.b = (float)c[2];
+        tileColor.a = 1;
     }
     /*
     private int RemoveWall(string other) {

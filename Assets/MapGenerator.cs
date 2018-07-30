@@ -20,7 +20,7 @@ public class MapGenerator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         int stageNum = SceneManager.GetActiveScene().name.ToCharArray()[SceneManager.GetActiveScene().name.Length - 1] - '1';
-        Debug.Log(stageNum);
+        Debug.Log("Map Generating... currunt stage is " + (stageNum + 1));
 
         tileType = new List<List<string[]>>();     //parser에서 읽어온 값 저장
         tileColor = new List<List<double[][]>>();

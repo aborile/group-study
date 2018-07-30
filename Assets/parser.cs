@@ -76,8 +76,32 @@ public class parser : MonoBehaviour {
         }
     }
 
-    public void Edit()
+    public void Edit(int sceneNum)
     {
         // change the value of each stage if the stage have been cleared
+        string[] data = File.ReadAllText(@"map.txt").Split('\n');
+        Debug.Log(data.Length);
+        using (StreamWriter outputFile = new StreamWriter(@"map.txt", false))
+        {
+            int line = 0;
+            switch (sceneNum)
+            {
+                case 1:
+                    line = 6;
+                    break;
+                case 2:
+                    line = 13;
+                    break;
+                case 3:
+                    line = 20;
+                    break;
+            }
+            //data[line] = "1";
+            for (int i = 0; i < data.Length - 1; i++)
+            {
+                outputFile.Write(data[i] + "\n");
+            }
+            outputFile.Write(data[data.Length - 1]);
+        }
     }
 }

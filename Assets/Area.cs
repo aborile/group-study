@@ -54,7 +54,7 @@ public class Area : MonoBehaviour {
                 tile[i].setColor(colorArr[i]);
                 tile[i].GetComponent<Renderer>().material.SetColor("_Color", tile[i].tileColor);
                 tile[i].transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color", tile[i].tileColor);
-                Debug.Log(tile[i].GetComponentInChildren<MeshRenderer>().material.GetColor("_Color"));
+                //Debug.Log(tile[i].GetComponentInChildren<MeshRenderer>().material.GetColor("_Color"));
                 if (tile[i].tileType == Tile.Type.empty)
                 {
                     Destroy(tile[i].gameObject);
@@ -64,6 +64,11 @@ public class Area : MonoBehaviour {
                     //벽 생성
                     wall = Instantiate(makewall, pos[i], transform.rotation);
                     wall = Instantiate(makewall, pos[i], transform.rotation);
+                    if (!(colorArr[i][0] == 1 && colorArr[i][1] == 1 && colorArr[i][2] == 1))
+                    {
+                        tile[i].gameObject.name = "dest tile";
+                        tile[i].tag = "Respawn";
+                    }
                 }
             }
         }

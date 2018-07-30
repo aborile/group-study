@@ -11,8 +11,10 @@ public class bound : MonoBehaviour
     public Renderer pRen, cRen;
     public WDColor chg;
     //public GameObject plane;
+    public Color destColor;
     
     public float valx, valy, valz, xz, val, len;
+    public bool isSet;
     /*
     void Vec()
     {
@@ -31,6 +33,7 @@ public class bound : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        isSet = false;
         valz = (float)5.2866768862868856059607589803715;
         xz = valz;
         valy = (float)9.1567929702489178861460072896;
@@ -47,6 +50,11 @@ public class bound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (IsOver())
+        {
+            GameFlow.isFirst = true;
+            GameFlow.state = "gameOver";
+        }
         //rb.AddForce(transform.forward * thrust);
         //rb.AddForce(0, 0, thrust, ForceMode.Impulse);
         //transform.position += Vector3.forward;
@@ -124,6 +132,17 @@ public class bound : MonoBehaviour
         //Debug.Log(player.position.y);
     }
 
+    private void LateUpdate()
+    {
+        if (!isSet)
+        {
+            destColor = GameObject.Find("dest tile").gameObject.GetComponent<Renderer>().material.GetColor("_Color");
+            Debug.Log(destColor);
+            GameObject.Find("dest color").GetComponent<Image>().color = destColor;
+            isSet = true;
+        }
+    }
+
     void OnTriggerEnter(Collider col)
     {
         if(col.tag == "Land")
@@ -147,7 +166,7 @@ public class bound : MonoBehaviour
             Color newc = chg.ctoR(pcCMY.add(ccCMY));
             pRen.material.SetColor("_Color", newc);
             Color barc = new Color(newc.r, newc.g, newc.b, (float)1.0);
-            GameObject.Find("color bar").GetComponent<Image>().color = barc;
+            GameObject.Find("player color").GetComponent<Image>().color = barc;
 
             //Debug.Log(player.transform.position.z);
             /*
@@ -157,7 +176,10 @@ public class bound : MonoBehaviour
         }
         if(col.tag == "Respawn")
         {
-            Debug.Log("great");
+            Debug.Log("Clear");
+            ColorScore();
+            GameFlow.isFirst = true;
+            GameFlow.state = "gameClear";
         }
     }
     
@@ -165,10 +187,24 @@ public class bound : MonoBehaviour
     {
         Color pColor = player.gameObject.GetComponent<Renderer>().material.GetColor("_Color");
         Vector3 pVec = new Vector3(pColor.r, pColor.g, pColor.b);
-        Vector3 dVec = new Vector3(0.5f, 0.3f, 1);
+        Vector3 dVec = new Vector3(destColor.r, destColor.g, destColor.b);
         Vector3 sVec = dVec - pVec;
         float sVecSiz = Mathf.Pow(sVec.x * sVec.x + sVec.y * sVec.y + sVec.z * sVec.z, 0.5f);
         float dVecSiz = Mathf.Pow(dVec.x * dVec.x + dVec.y * dVec.y + dVec.z * sVec.z, 0.5f);
-        float score = (1 > (sVecSiz / dVecSiz) ? 0 : (1 - (sVecSiz / dVecSiz)) * 100);
+        Debug.Log("score vector size is " + sVecSiz + "\n dest  vector size is " + dVecSiz);
+        int pScore = (int)(sVecSiz / dVecSiz);
+        int score = (1 < pScore ? 0 : (1 - pScore) * 100);
+        GameFlow.gameScore = score;
+        Debug.Log("Game Cleared! Your Score is " + score);
+    }
+
+    bool IsOver()
+    {
+        Color pColor = player.gameObject.GetComponent<Renderer>().material.GetColor("_Color");
+        if (pColor.r == 0 && pColor.g == 0 && pColor.b == 0)
+            return true;
+        if (player.transform.position.y < -5)
+            return true;
+        return false;
     }
 }
