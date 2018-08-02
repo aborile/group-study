@@ -20,8 +20,7 @@ public class UImanager : MonoBehaviour {
     public void OnClickButtonMain()
     {
         Debug.Log("Clicked in Main Scene!");
-        GameFlow.isFirst = true;
-        GameFlow.state = "selectStage";
+        GameFlow.LoadScene("selectStage");
         Debug.Log("all have been changed in UIMagager");
 
     }
@@ -29,20 +28,19 @@ public class UImanager : MonoBehaviour {
     public void OnClickButtonSelect(Button b)
     {
         Debug.Log("Clicked in Select Scene!");
-        GameFlow.isFirst = true;
         if (b.gameObject.name == "stage1")
         {
-            GameFlow.state = "inGameStage1";
+            GameFlow.LoadScene("inGameStage1");
             Debug.Log("Start Stage 1");
         }
         else if (b.gameObject.name == "stage2")
         {
-            GameFlow.state = "inGameStage2";
+            GameFlow.LoadScene("inGameStage2");
             Debug.Log("Start Stage 2");
         }
         else if (b.gameObject.name == "stage3")
         {
-            GameFlow.state = "inGameStage3";
+            GameFlow.LoadScene("inGameStage3");
             Debug.Log("Start Stage 3");
         }
     }
@@ -50,56 +48,50 @@ public class UImanager : MonoBehaviour {
     public void OnClickButtonInGame(Button b)
     {
         Debug.Log("Clicked in Game Scene!");
-        GameFlow.isFirst = true;
         if (b.gameObject.name == "over")
         {
             Debug.Log("Game Over!");
             gameSceneOverIn = SceneManager.GetActiveScene().name.Substring(SceneManager.GetActiveScene().name.Length - 1);
-            GameFlow.state = "gameOver";
+            GameFlow.LoadScene("gameOver");
         }
         else if (b.gameObject.name == "clear")
         {
             Debug.Log("Game Clear!");
             gameSceneOverIn = SceneManager.GetActiveScene().name.Substring(SceneManager.GetActiveScene().name.Length - 1);
             GameFlow.LastScene(gameSceneOverIn);
-            GameFlow.state = "gameClear";
+            GameFlow.LoadScene("gameClear");
         }
     }
 
     public void OnClickButtonGameOver()
     {
         Debug.Log("Clicked in GameOver Scene!");
-        GameFlow.isFirst = true;
-        GameFlow.state = "inGameStage" + GameFlow.gameScenePlayedLast;
+        GameFlow.LoadScene("inGameStage" + GameFlow.gameScenePlayedLast);
     }
 
     public void OnClickButtonGameClear()
     {
         Debug.Log("Clicked in GameClear Scene!");
-        GameFlow.isFirst = true;
-        GameFlow.state = "result";
+        GameFlow.LoadScene("result");
     }
 
     public void OnClickButtonResult()
     {
         Debug.Log("Clicked in Result Scene!");
-        GameFlow.isFirst = true;
-        GameFlow.state = "selectStage";
+        GameFlow.LoadScene("selectStage");
     }
 
     public void OnClickButtonRestart()
     {
         Debug.Log("Restart the game!");
-        GameFlow.isFirst = true;
         gameSceneOverIn = SceneManager.GetActiveScene().name.Substring(SceneManager.GetActiveScene().name.Length - 1);
-        GameFlow.state = "gameOver";
+        GameFlow.LoadScene("gameOver");
     }
 
     public void OnClickButtonQuit()
     {
         Debug.Log("Quit the game!");
-        GameFlow.isFirst = true;
         gameSceneOverIn = SceneManager.GetActiveScene().name.Substring(SceneManager.GetActiveScene().name.Length - 1);
-        GameFlow.state = "selectStage";
+        GameFlow.LoadScene("selectStage");
     }
 }

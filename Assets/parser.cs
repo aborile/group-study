@@ -36,16 +36,29 @@ public class parser : MonoBehaviour {
         mapData = new List<List<string[]>>();
         colorData = new List<List<double[][]>>();
         int stageNum = Convert.ToInt16(t.ReadLine());
+        Debug.Log("stageNum inited: " + stageNum);
         isCleared = new bool[stageNum];
         for (int i = 0; i < stageNum; i++)
         {
-            int nums = Convert.ToInt16(t.ReadLine());
+            string n = t.ReadLine();
+            if (n == "" || n == " " || n == "\n")
+            {
+                n = t.ReadLine();
+            }
+            Debug.Log(n);
+            int nums = Convert.ToInt16(n);
+            Debug.Log("line nums inited: " + i + "th line - " + nums);
             //Debug.Log("nums: " + nums[0] + "," + nums[1]);
             List<string[]> mapList = new List<string[]>();
             List<double[][]> colorList = new List<double[][]>();
             for (int j = 0; j < nums; j++)
             {
                 string text = t.ReadLine();
+                if (text == "" || text == " " || text == "\n")
+                {
+                    text = t.ReadLine();
+                }
+                Debug.Log(text);
                 string[] tile = text.Split(' ');      //공백 단위로 배열에 저장
                 string[] sp = new string[tile.Length];
                 double[][] cp = new double[tile.Length][];
@@ -65,7 +78,13 @@ public class parser : MonoBehaviour {
             }
             mapData.Add(mapList);
             colorData.Add(colorList);
-            if (Convert.ToInt16(t.ReadLine()) == 1)
+            Debug.Log(i + "th map data read");
+            string clear = t.ReadLine();
+            if (clear == "" || clear == " " || clear == "\n")
+            {
+                clear = t.ReadLine();
+            }
+            if (Convert.ToInt16(clear) == 1)
             {
                 isCleared[i] = true;
             }
@@ -96,10 +115,10 @@ public class parser : MonoBehaviour {
                     line = 20;
                     break;
             }
-            //data[line] = "1";
+            data[line] = "1";
             for (int i = 0; i < data.Length - 1; i++)
             {
-                outputFile.Write(data[i] + "\n");
+                outputFile.WriteLine(data[i]);
             }
             outputFile.Write(data[data.Length - 1]);
         }

@@ -9,11 +9,12 @@ public class GameFlow : MonoBehaviour {
     public static string state;
     public static GameFlow instance = null;
     public static int gameScenePlayedLast;
-    public static bool isFirst;
+    public static bool isFirst, haveToInitText;
     public static int gameScore;
-
+    
     public parser p;
-    GameObject text1, text2, text3, complete, clear, fail;
+    public static GameObject text1, text2, text3;
+    GameObject complete, clear, fail;
 
     private void Awake()
     {
@@ -36,8 +37,9 @@ public class GameFlow : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-        //if (isFirst) {
-            Debug.Log("message from GameFlow.cs Update()");
+        if (isFirst)
+        {
+            //Debug.Log("message from GameFlow.cs Update()" + state+ " "+ isFirst);
             switch (state)
             {
                 case "main":
@@ -66,128 +68,159 @@ public class GameFlow : MonoBehaviour {
                     onStateResult();
                     break;
             }
-        //}
-	}
+        }
+            //Debug.Log("Update ends;");
+    }
 
     private void LateUpdate()
     {
         //if (isFirst) Debug.Log(isFirst + "from LateUpdate()");
-        //isFirst = false;
+        //if (isFirst)
+            //isFirst = false;
+    }
+
+    public static void LoadScene(string s)
+    {
+
+        Debug.Log("Called GameFlow.LoadScene function;");
+        Debug.Log("Text objects are now " + text1 + ", " + text2 + ", " + text3);
+
+        switch (s)
+        {
+            case "main":
+                SceneManager.LoadScene("Main");
+                break;
+            case "selectStage":
+                SceneManager.LoadScene("SelectStage");
+                break;
+            case "inGameStage1":
+                SceneManager.LoadScene("InGameStage1");
+                break;
+            case "inGameStage2":
+                SceneManager.LoadScene("InGameStage2");
+                break;
+            case "inGameStage3":
+                SceneManager.LoadScene("InGameStage3");
+                break;
+            case "gameOver":
+                SceneManager.LoadScene("GameOver");
+                break;
+            case "gameClear":
+                SceneManager.LoadScene("GameClear");
+                break;
+            case "result":
+                SceneManager.LoadScene("Result");
+                break;
+        }
+        state = s;
+        isFirst = true;
+
+        Debug.Log("set GameFlow.isFirst true;");
+
     }
 
     void onStateMain()
     {
-        if (SceneManager.GetActiveScene().name != "Main") {
-            //init. load the stage info
-            Debug.Log("loading . . .");
-            SceneManager.LoadScene("Main");
-        }
         //Debug.Log(SceneManager.GetActiveScene().name);
-
+        haveToInitText = true;
         isFirst = false;
     }
 
     void onStateSelectStage()
     {
-        if (SceneManager.GetActiveScene().name != "SelectStage")
+        if (isFirst)
         {
-            Debug.Log("Game Scene Changed");
-            SceneManager.LoadScene("SelectStage");
-        }
-        //init stage data
-        Debug.Log("init stage data");
-        text1 = GameObject.Find("Text1");
-        text2 = GameObject.Find("Text2");
-        text3 = GameObject.Find("Text3");
-        //text1.SetActive(false);
-        //text2.SetActive(false);
-        //text3.SetActive(false);
-        p = GameObject.Find("GameObject").GetComponent<parser>();
-        if (p.isCleared != null && (text1 != null && text2 != null && text3 != null))
-        {
-            Debug.Log("text active");
-            text1.SetActive(p.isCleared[0]);
-            text2.SetActive(p.isCleared[1]);
-            text3.SetActive(p.isCleared[2]);
-        }
-        //Debug.Log(SceneManager.GetActiveScene().name);
+            //init stage data
+            Debug.Log("init stage data");
+            //if (haveToInitText) {
+            if (text1 == null || text2 == null || text3 == null) { 
+                Debug.Log("initiate text objects");
+                text1 = GameObject.Find("Text1");
+                text2 = GameObject.Find("Text2");
+                text3 = GameObject.Find("Text3");
+                haveToInitText = false;
+            }
+            //text1.SetActive(false);
+            //text2.SetActive(false);
+            //text3.SetActive(false);
+            p = GameObject.Find("GameObject").GetComponent<parser>();
+            Debug.Log(text1);
+            Debug.Log(text2);
+            Debug.Log(text3);
+            if (p.isCleared != null && (text1 != null && text2 != null && text3 != null))
+            {
+                Debug.Log("text active");
+                text1.SetActive(p.isCleared[0]);
+                text2.SetActive(p.isCleared[1]);
+                text3.SetActive(p.isCleared[2]);
+            }
+            //Debug.Log(SceneManager.GetActiveScene().name);
 
-        Debug.Log("change isFirst");
-        isFirst = false;
+            Debug.Log("change isFirst");
+            isFirst = false;
+            Debug.Log(text1);
+            Debug.Log(text2);
+            Debug.Log(text3);
+        }
     }
     
-    void onStateInGame1() {
-        if (SceneManager.GetActiveScene().name != "InGameStage1")
-        {
-            SceneManager.LoadScene("InGameStage1");
-            LastScene("1");
-        }
+    void onStateInGame1()
+    {
+        Debug.Log(text1);
+        Debug.Log(text2);
+        Debug.Log(text3);
+        LastScene("1");
         //update UI of player color
         //click menu button to move to Menu Scene
         //or GameOver
         //Debug.Log(SceneManager.GetActiveScene().name);
-
         isFirst = false;
+
     }
     void onStateInGame2()
     {
-        if (SceneManager.GetActiveScene().name != "InGameStage2")
-        {
-            SceneManager.LoadScene("InGameStage2");
-            LastScene("2");
-        }
+        LastScene("2");
         //update UI of player color
         //click menu button to move to Menu Scene
         //or GameOver
-        
         isFirst = false;
     }
     void onStateInGame3()
     {
-        if (SceneManager.GetActiveScene().name != "InGameStage3")
-        {
-            SceneManager.LoadScene("InGameStage3");
-            LastScene("3");
-        }
+        LastScene("3");
         //update UI of player color
         //click menu button to move to Menu Scene
         //or GameOver
-
         isFirst = false;
     }
 
-    void onStateGameOver() {
-        if (SceneManager.GetActiveScene().name != "GameOver")
-        {
-            SceneManager.LoadScene("GameOver");
-        }
+    void onStateGameOver()
+    {
+        Debug.Log(text1);
+        Debug.Log(text2);
+        Debug.Log(text3);
         Debug.Log("You Died: Stage" + gameScenePlayedLast);
         //Fade-out
         //unable to move player
-
         isFirst = false;
     }
 
     void onStateGameClear() {
-        if (SceneManager.GetActiveScene().name != "GameClear")
-        {
-            SceneManager.LoadScene("GameClear");
-        }
         //unable to move player
         //save data of cleared stage
         //LastScene(SceneManager.GetActiveScene().name.Substring(SceneManager.GetActiveScene().name.Length - 1));
         //Debug.Log("Clear stage " + gameScenePlayedLast);
-        p.isCleared[gameScenePlayedLast - 1] = true;
-        p.Edit(gameScenePlayedLast);
+        if (gameScore >= 70)
+        {
+            p.isCleared[gameScenePlayedLast - 1] = true;
+            p.Edit(gameScenePlayedLast);
+        }
 
         state = "result";
+        LoadScene("result");
     }
 
     void onStateResult() {
-        if (SceneManager.GetActiveScene().name != "Result")
-        {
-            SceneManager.LoadScene("Result");
-        }
         //show result
         complete = GameObject.Find("complete");
         clear = GameObject.Find("clear");
@@ -213,7 +246,6 @@ public class GameFlow : MonoBehaviour {
                 fail.SetActive(true);
             }
         }
-
         isFirst = false;
     }
 
