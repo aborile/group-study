@@ -11,9 +11,11 @@ public class GameFlow : MonoBehaviour {
     public static int gameScenePlayedLast;
     public static bool isFirst, haveToInitText;
     public static int gameScore;
+
+    public static string nextState = null;
     
     public parser p;
-    public static GameObject text1, text2, text3;
+    public GameObject text1, text2, text3;
     GameObject complete, clear, fail;
 
     private void Awake()
@@ -37,9 +39,9 @@ public class GameFlow : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-        if (isFirst)
+        //if (isFirst)
         {
-            //Debug.Log("message from GameFlow.cs Update()" + state+ " "+ isFirst);
+            Debug.Log("message from GameFlow.cs Update()" + state);
             switch (state)
             {
                 case "main":
@@ -77,13 +79,21 @@ public class GameFlow : MonoBehaviour {
         //if (isFirst) Debug.Log(isFirst + "from LateUpdate()");
         //if (isFirst)
             //isFirst = false;
+        if (nextState != null)
+        {
+            state = nextState;
+            isFirst = true;
+            nextState = null;
+        }
     }
 
     public static void LoadScene(string s)
     {
 
         Debug.Log("Called GameFlow.LoadScene function;");
-        Debug.Log("Text objects are now " + text1 + ", " + text2 + ", " + text3);
+        //Debug.Log("Text objects are now " + text1 + ", " + text2 + ", " + text3);
+        nextState = s;
+        isFirst = true;
 
         switch (s)
         {
@@ -112,8 +122,6 @@ public class GameFlow : MonoBehaviour {
                 SceneManager.LoadScene("Result");
                 break;
         }
-        state = s;
-        isFirst = true;
 
         Debug.Log("set GameFlow.isFirst true;");
 
@@ -131,36 +139,29 @@ public class GameFlow : MonoBehaviour {
         if (isFirst)
         {
             //init stage data
-            Debug.Log("init stage data");
             //if (haveToInitText) {
-            if (text1 == null || text2 == null || text3 == null) { 
+            /* if (text1 == null || text2 == null || text3 == null) { 
                 Debug.Log("initiate text objects");
                 text1 = GameObject.Find("Text1");
                 text2 = GameObject.Find("Text2");
                 text3 = GameObject.Find("Text3");
                 haveToInitText = false;
-            }
+            }*/
+            text1 = GameObject.Find("TextObject").GetComponent<TextManager>().text1;
+            text2 = GameObject.Find("TextObject").GetComponent<TextManager>().text2;
+            text3 = GameObject.Find("TextObject").GetComponent<TextManager>().text3;
             //text1.SetActive(false);
             //text2.SetActive(false);
             //text3.SetActive(false);
             p = GameObject.Find("GameObject").GetComponent<parser>();
-            Debug.Log(text1);
-            Debug.Log(text2);
-            Debug.Log(text3);
             if (p.isCleared != null && (text1 != null && text2 != null && text3 != null))
             {
-                Debug.Log("text active");
                 text1.SetActive(p.isCleared[0]);
                 text2.SetActive(p.isCleared[1]);
                 text3.SetActive(p.isCleared[2]);
             }
             //Debug.Log(SceneManager.GetActiveScene().name);
-
-            Debug.Log("change isFirst");
             isFirst = false;
-            Debug.Log(text1);
-            Debug.Log(text2);
-            Debug.Log(text3);
         }
     }
     
