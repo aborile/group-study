@@ -111,10 +111,13 @@ public class parser : MonoBehaviour {
                     line = 6;
                     break;
                 case 2:
-                    line = 13;
+                    line = 12;
                     break;
                 case 3:
-                    line = 20;
+                    line = 19;
+                    break;
+                case 4:
+                    lind = 26;
                     break;
             }
             data[line] = "1";

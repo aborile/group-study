@@ -17,7 +17,7 @@ public class GameFlow : MonoBehaviour {
     public static string nextState = null;
     
     public parser p;
-    public GameObject text1, text2, text3;
+    public GameObject text1, text2, text3, text4;
     GameObject complete, clear, fail;
 
     private void Awake()
@@ -114,6 +114,9 @@ public class GameFlow : MonoBehaviour {
             case "inGameStage3":
                 SceneManager.LoadScene("InGameStage3");
                 break;
+            case "inGameStage4":
+                SceneManager.LoadScene("InGameStage4");
+                break;
             case "gameOver":
                 SceneManager.LoadScene("GameOver");
                 break;
@@ -152,6 +155,7 @@ public class GameFlow : MonoBehaviour {
             text1 = GameObject.Find("TextObject").GetComponent<TextManager>().text1;
             text2 = GameObject.Find("TextObject").GetComponent<TextManager>().text2;
             text3 = GameObject.Find("TextObject").GetComponent<TextManager>().text3;
+            text4 = GameObject.Find("TextObject").GetComponent<TextManager>().text4;
             //text1.SetActive(false);
             //text2.SetActive(false);
             //text3.SetActive(false);
@@ -161,6 +165,7 @@ public class GameFlow : MonoBehaviour {
                 text1.SetActive(p.isCleared[0]);
                 text2.SetActive(p.isCleared[1]);
                 text3.SetActive(p.isCleared[2]);
+                text4.SetActive(p.isCleared[3]);
             }
             //Debug.Log(SceneManager.GetActiveScene().name);
             isFirst = false;
@@ -194,6 +199,12 @@ public class GameFlow : MonoBehaviour {
         //update UI of player color
         //click menu button to move to Menu Scene
         //or GameOver
+        isFirst = false;
+    }
+
+    void onStateInGame4()
+    {
+        LastScene("4");
         isFirst = false;
     }
 

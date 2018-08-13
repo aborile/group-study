@@ -43,6 +43,11 @@ public class UImanager : MonoBehaviour {
             GameFlow.LoadScene("inGameStage3");
             Debug.Log("Start Stage 3");
         }
+        else if (b.gameObject.name == "stage4")
+        {
+            GameFlow.LoadScene("inGameStage4");
+            Debug.Log("Start Stage 4");
+        }
     }
 
     public void OnClickButtonInGame(Button b)
