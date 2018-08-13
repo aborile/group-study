@@ -12,6 +12,8 @@ public class GameFlow : MonoBehaviour {
     public static bool isFirst, haveToInitText;
     public static int gameScore;
 
+    public static HSV playerCol, destCol;
+
     public static string nextState = null;
     
     public parser p;
@@ -197,9 +199,6 @@ public class GameFlow : MonoBehaviour {
 
     void onStateGameOver()
     {
-        Debug.Log(text1);
-        Debug.Log(text2);
-        Debug.Log(text3);
         Debug.Log("You Died: Stage" + gameScenePlayedLast);
         //Fade-out
         //unable to move player
@@ -216,7 +215,6 @@ public class GameFlow : MonoBehaviour {
             p.isCleared[gameScenePlayedLast - 1] = true;
             p.Edit(gameScenePlayedLast);
         }
-
         state = "result";
         LoadScene("result");
     }
@@ -226,6 +224,16 @@ public class GameFlow : MonoBehaviour {
         complete = GameObject.Find("complete");
         clear = GameObject.Find("clear");
         fail = GameObject.Find("failed");
+
+        GameObject playC = GameObject.Find("player dot");
+        GameObject destC = GameObject.Find("dest dot");
+        
+        Debug.Log("p: " + playerCol.h + "," + playerCol.s + "," + playerCol.v);
+        Debug.Log("d: " + destCol.h + "," + destCol.s + "," + destCol.v);
+        
+        playC.gameObject.transform.position = new Vector3(1024 + (100 + 100 * (1 - playerCol.v)) * Mathf.Cos(Mathf.Deg2Rad * playerCol.h), 768 + (100 + 100 * (1 - playerCol.v)) * Mathf.Sin(Mathf.Deg2Rad * playerCol.h) - 200, 0);
+        destC.gameObject.transform.position = new Vector3(1024 + (100 + 100 * (1 - destCol.v)) * Mathf.Cos(Mathf.Deg2Rad * destCol.h), 768 + (100 + 100 * (1 - destCol.v)) * Mathf.Sin(Mathf.Deg2Rad * destCol.h) - 200, 0);
+
         if (complete != null && clear != null && fail != null)
         {
             if (gameScore == 100)

@@ -41,6 +41,7 @@ public class parser : MonoBehaviour {
         for (int i = 0; i < stageNum; i++)
         {
             string n = t.ReadLine();
+            n = n.Split(' ')[0];
             if (n == "" || n == " " || n == "\n")
             {
                 n = t.ReadLine();
@@ -97,6 +98,7 @@ public class parser : MonoBehaviour {
 
     public void Edit(int sceneNum)
     {
+        /*
         // change the value of each stage if the stage have been cleared
         string[] data = File.ReadAllText(@"map.txt").Split('\n');
         Debug.Log(data.Length);
@@ -122,5 +124,6 @@ public class parser : MonoBehaviour {
             }
             outputFile.Write(data[data.Length - 1]);
         }
+        */
     }
 }

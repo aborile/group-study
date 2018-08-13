@@ -43,6 +43,13 @@ public class CMYK
     }
 }
 
+public class HSV
+{
+    public float h;
+    public float s;
+    public float v;
+}
+
 public class WDColor {
     public bool self = true;
     public CMYK rtoC(UnityEngine.Color rgb)
@@ -94,5 +101,56 @@ public class WDColor {
         if (rgb.b > 255) rgb.b = 255;
         else if (rgb.b < 0) rgb.b = 0;
         return rgb;
+    }
+
+    public HSV rtoH(UnityEngine.Color rgb)
+    {
+        HSV hsv = new HSV();
+        Debug.Log("input rgb color: " + rgb.r + ", " + rgb.g + ", " + rgb.b);
+        float r = rgb.r;
+        float g = rgb.g;
+        float b = rgb.b;
+        Debug.Log("r' g' b' is    : " + r + ", " + g + ", " + b);
+        float cMax, cMin;
+        if (r > g)
+        {
+            if (r > b)
+            {
+                cMax = r;
+                if (g > b) { cMin = b; }
+                else { cMin = g; }
+            }
+            else
+            {
+                cMax = b;
+                cMin = g;
+            }
+        }
+        else
+        {
+            if (g > b)
+            {
+                cMax = g;
+                if (r > b) { cMin = b; }
+                else { cMin = r; }
+            }
+            else { cMax = b; cMin = r; }
+        }
+        float delta = cMax - cMin;
+        Debug.Log("cMax is: " + cMax);
+        Debug.Log("cMin is: " + cMin);
+        Debug.Log("dlta is: " + delta);
+
+        if (delta == 0) { hsv.h = 0; }
+        else if (cMax == r) { hsv.h = 60 * (((g - b) / delta) % 6); }
+        else if (cMax == g) { hsv.h = 60 * ((b - r) / delta + 2); }
+        else if (cMax == b) { hsv.h = 60 * ((r - g) / delta + 4); }
+
+        if (cMax == 0) { hsv.s = 0; }
+        else { hsv.s = delta / cMax; }
+
+        hsv.v = cMax;
+
+        return hsv;
     }
 }

@@ -196,6 +196,11 @@ public class bound : MonoBehaviour
         int score = (1 < pScore ? 0 : (1 - pScore) * 100);
         GameFlow.gameScore = score;
         Debug.Log("Game Cleared! Your Score is " + score);
+
+        GameFlow.playerCol = chg.rtoH(pColor);
+        GameFlow.destCol = chg.rtoH(destColor);
+        Debug.Log(GameFlow.playerCol.h);
+        Debug.Log(GameFlow.destCol.h);
     }
 
     bool IsOver()
