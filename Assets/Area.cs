@@ -68,6 +68,7 @@ public class Area : MonoBehaviour {
                     {
                         tile[i].gameObject.name = "dest tile";
                         tile[i].tag = "Respawn";
+                        wall.tag = "Respawn";
                     }
                 }
             }

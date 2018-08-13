@@ -54,10 +54,8 @@ public class bound : MonoBehaviour
     {
         if (isOver)
         {
-            Debug.Log("leggooooooo");
             GameFlow.isFirst = true;
             GameFlow.LoadScene("gameOver");
-            Debug.Log("leggooooooo");
         }
         //rb.AddForce(transform.forward * thrust);
         //rb.AddForce(0, 0, thrust, ForceMode.Impulse);
