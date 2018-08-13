@@ -174,9 +174,6 @@ public class GameFlow : MonoBehaviour {
     
     void onStateInGame1()
     {
-        Debug.Log(text1);
-        Debug.Log(text2);
-        Debug.Log(text3);
         LastScene("1");
         //update UI of player color
         //click menu button to move to Menu Scene

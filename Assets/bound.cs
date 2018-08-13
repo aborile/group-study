@@ -14,7 +14,7 @@ public class bound : MonoBehaviour
     public Color destColor;
     
     public float valx, valy, valz, xz, val, len;
-    public bool isSet;
+    public bool isSet, isOver;
     /*
     void Vec()
     {
@@ -45,15 +45,19 @@ public class bound : MonoBehaviour
         //player.velocity = new Vector3(0, 0, valz);
         player.velocity = new Vector3(0, 0, valz);
         //plane.transform.position = new Vector3(0, (float)1.21, len/2 - (float)0.5);
+        player.transform.position.Set(0, 5, 0);
+        isOver = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (IsOver())
+        if (isOver)
         {
+            Debug.Log("leggooooooo");
             GameFlow.isFirst = true;
-            GameFlow.state = "gameOver";
+            GameFlow.LoadScene("gameOver");
+            Debug.Log("leggooooooo");
         }
         //rb.AddForce(transform.forward * thrust);
         //rb.AddForce(0, 0, thrust, ForceMode.Impulse);
@@ -130,6 +134,7 @@ public class bound : MonoBehaviour
             //Debug.Log(player.velocity);
         }
         //Debug.Log(player.position.y);
+        IsOver();
     }
 
     private void LateUpdate()
@@ -179,7 +184,7 @@ public class bound : MonoBehaviour
             Debug.Log("Clear");
             ColorScore();
             GameFlow.isFirst = true;
-            GameFlow.state = "gameClear";
+            GameFlow.LoadScene("gameClear");
         }
     }
     
@@ -203,13 +208,12 @@ public class bound : MonoBehaviour
         Debug.Log(GameFlow.destCol.h);
     }
 
-    bool IsOver()
+    void IsOver()
     {
         Color pColor = player.gameObject.GetComponent<Renderer>().material.GetColor("_Color");
         if (pColor.r == 0 && pColor.g == 0 && pColor.b == 0)
-            return true;
+            isOver = true;
         if (player.transform.position.y < -5)
-            return true;
-        return false;
+            isOver = true;
     }
 }
