@@ -117,12 +117,14 @@ public class parser : MonoBehaviour {
                     line = 19;
                     break;
                 case 4:
-                    lind = 26;
+                    line = 26;
                     break;
             }
             data[line] = "1";
             for (int i = 0; i < data.Length - 1; i++)
             {
+                Debug.Log(data[i]);
+                //outputFile.Write(data[i] + "\n");
                 outputFile.WriteLine(data[i]);
             }
             outputFile.Write(data[data.Length - 1]);

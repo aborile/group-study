@@ -15,6 +15,7 @@ public class MapGenerator : MonoBehaviour {
     public List<List<double[][]>> tileColor;
     public parser p;
     public Area area;
+    public GameObject black;
     Vector3 areaP;
 
 	// Use this for initialization
@@ -41,6 +42,11 @@ public class MapGenerator : MonoBehaviour {
 
         Rigidbody player = GetComponent<Rigidbody>();
         player.transform.Rotate(new Vector3(0, 30, 0), Space.Self);
+
+        /*GameObject b = Instantiate(black, GameObject.Find("Canvas").transform);
+        b.gameObject.name = "Black";
+        
+        GameObject.Find("Black").transform.SetAsLastSibling();*/
     }
 	
 	// Update is called once per frame

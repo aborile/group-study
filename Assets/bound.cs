@@ -14,7 +14,7 @@ public class bound : MonoBehaviour
     public Color destColor;
     
     public float valx, valy, valz, xz, val, len;
-    public bool isSet, isOver;
+    public bool isSet, isOver, isFadedOut, isFadedIn;
     /*
     void Vec()
     {
@@ -31,6 +31,39 @@ public class bound : MonoBehaviour
     }
     */
     // Use this for initialization
+    IEnumerator FadeIn()
+    {
+        //GameObject.Find("Canvas").transform.SetAsLastSibling();
+        //GameObject.Find("Black").transform.SetAsLastSibling();
+        for (float f = 1.0f; f >= 0; f -= 0.05f)
+        {
+            Color c = GameObject.Find("Black").GetComponent<Image>().color;
+            c.a = f;
+            GameObject.Find("Black").GetComponent<Image>().color = c;
+            yield return null;
+        }
+        Debug.Log("Fade 1");
+        isFadedIn = true;
+        yield return isFadedIn;
+        yield break;
+    }
+    IEnumerator FadeOut()
+    {
+        //GameObject.Find("Canvas").transform.SetAsLastSibling();
+        //GameObject.Find("Black").transform.SetAsLastSibling();
+        for (float f = 0.0f; f <= 1.0f; f += 0.02f)
+        {
+            Color c = GameObject.Find("Black").GetComponent<Image>().color;
+            c.a = f;
+            GameObject.Find("Black").GetComponent<Image>().color = c;
+            yield return null;
+        }
+        Debug.Log("Fade 2");
+        yield return new WaitForSeconds(1);
+        isFadedOut = true;
+        yield return isFadedOut;
+        yield break;
+    }
     void Start()
     {
         isSet = false;
@@ -43,10 +76,21 @@ public class bound : MonoBehaviour
         player = GetComponent<Rigidbody>();
         //plane = GameObject.Find("Scope");
         //player.velocity = new Vector3(0, 0, valz);
-        player.velocity = new Vector3(0, 0, valz);
+        //player.velocity = new Vector3(0, 0, valz);
         //plane.transform.position = new Vector3(0, (float)1.21, len/2 - (float)0.5);
+        //player.transform.position.Set(0, 5, 0);
+        //Color a = GameObject.Find("Black").GetComponent<Image>().material.color;
+        //a.a = 0;
+        //GameObject.Find("Black").GetComponent<Image>().material.color = a;
+        if (!isFadedIn)
+            StartCoroutine("FadeIn");
+        if (isFadedIn)
+        {
+            StopCoroutine("FadeIn");
+            isFadedIn = false;
+        }
+        player.velocity = new Vector3(0, 0, valz);
         player.transform.position.Set(0, 5, 0);
-        isOver = false;
     }
 
     // Update is called once per frame
@@ -54,8 +98,19 @@ public class bound : MonoBehaviour
     {
         if (isOver)
         {
-            GameFlow.isFirst = true;
-            GameFlow.LoadScene("gameOver");
+            //GameFlow.isFirst = true;
+            //GameFlow.LoadScene("gameOver");
+            player.velocity = new Vector3(0, 0, 0);
+            //player.position = new Vector3(player.position.x, player.position.y, player.position.z);
+            if (!isFadedOut)
+                StartCoroutine("FadeOut");
+            if (isFadedOut)
+            {
+                StopCoroutine("FadeOut");
+                GameFlow.LoadScene(GameFlow.state);
+                isFadedOut = false;
+                isOver = false;
+            }
         }
         //rb.AddForce(transform.forward * thrust);
         //rb.AddForce(0, 0, thrust, ForceMode.Impulse);
@@ -67,7 +122,7 @@ public class bound : MonoBehaviour
             player.velocity = new Vector3(0, 10, 5);
         }
         */
-        if (Input.GetKey(KeyCode.A)){
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
             /*
             Vector3 tmpv = player.velocity;
             tmpv[0] -= (float)0.2;
@@ -95,7 +150,7 @@ public class bound : MonoBehaviour
             }
             //Debug.Log(player.velocity);
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             /*
             Vector3 tmpv = player.velocity;
@@ -200,10 +255,9 @@ public class bound : MonoBehaviour
         GameFlow.gameScore = score;
         Debug.Log("Game Cleared! Your Score is " + score);
 
-        GameFlow.playerCol = chg.rtoH(pColor);
-        GameFlow.destCol = chg.rtoH(destColor);
-        Debug.Log(GameFlow.playerCol.h);
-        Debug.Log(GameFlow.destCol.h);
+        GameFlow.playerCol = pColor;
+        GameFlow.playerCol.a = 1;
+        GameFlow.destCol = destColor;
     }
 
     void IsOver()

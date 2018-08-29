@@ -12,7 +12,7 @@ public class GameFlow : MonoBehaviour {
     public static bool isFirst, haveToInitText;
     public static int gameScore;
 
-    public static HSV playerCol, destCol;
+    public static Color playerCol, destCol;
 
     public static string nextState = null;
     
@@ -43,7 +43,7 @@ public class GameFlow : MonoBehaviour {
     void Update () {
         //if (isFirst)
         {
-            Debug.Log("message from GameFlow.cs Update()" + state);
+            //Debug.Log("message from GameFlow.cs Update()" + state);
             switch (state)
             {
                 case "main":
@@ -210,7 +210,9 @@ public class GameFlow : MonoBehaviour {
         Debug.Log("You Died: Stage" + gameScenePlayedLast);
         //Fade-out
         //unable to move player
-        isFirst = false;
+        //isFirst = false;
+
+        //GameFlow.LoadScene("inGameStage" + GameFlow.gameScenePlayedLast);
     }
 
     void onStateGameClear() {
@@ -233,14 +235,11 @@ public class GameFlow : MonoBehaviour {
         clear = GameObject.Find("clear");
         fail = GameObject.Find("failed");
 
-        GameObject playC = GameObject.Find("player dot");
-        GameObject destC = GameObject.Find("dest dot");
-        
-        Debug.Log("p: " + playerCol.h + "," + playerCol.s + "," + playerCol.v);
-        Debug.Log("d: " + destCol.h + "," + destCol.s + "," + destCol.v);
-        
-        playC.gameObject.transform.position = new Vector3(1024 + (100 + 100 * (1 - playerCol.v)) * Mathf.Cos(Mathf.Deg2Rad * playerCol.h), 768 + (100 + 100 * (1 - playerCol.v)) * Mathf.Sin(Mathf.Deg2Rad * playerCol.h) - 200, 0);
-        destC.gameObject.transform.position = new Vector3(1024 + (100 + 100 * (1 - destCol.v)) * Mathf.Cos(Mathf.Deg2Rad * destCol.h), 768 + (100 + 100 * (1 - destCol.v)) * Mathf.Sin(Mathf.Deg2Rad * destCol.h) - 200, 0);
+        GameObject playC = GameObject.Find("player color");
+        GameObject destC = GameObject.Find("dest color");
+
+        GameObject.Find("player color").GetComponent<Image>().color = playerCol;
+        GameObject.Find("dest color").GetComponent<Image>().color = destCol;
 
         if (complete != null && clear != null && fail != null)
         {
@@ -270,4 +269,5 @@ public class GameFlow : MonoBehaviour {
     {
         gameScenePlayedLast = sceneNum[0] - '0';
     }
+
 }
